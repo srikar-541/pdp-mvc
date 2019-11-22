@@ -1,3 +1,4 @@
+/*
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -118,6 +119,8 @@ public class Runner {
           System.out.println("Specify width of the flag:");
           int width = s.nextInt();
           model = new ImageProcessor(width, (2 * width) / 3);
+          ImageManipulation m = (ImageManipulation) model;
+          m.dither();
           cmd = new FranceFlag(width);
           break;
         case "Switzerland":
@@ -173,5 +176,5 @@ public class Runner {
       }
     }
   }
-
 }
+*/

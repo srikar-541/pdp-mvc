@@ -6,9 +6,7 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
-
-import control.ImageGenerationCommand;
-import control.ImageManipulationCommand;
+import control.ImageProcessingCommand;
 import control.commands.Manipulation.Blur;
 import control.commands.Generation.CheckeredBoard;
 import control.commands.Generation.FranceFlag;
@@ -22,7 +20,6 @@ import control.commands.Manipulation.Sepia;
 import control.commands.Manipulation.Sharpen;
 import control.commands.Generation.Switzerland;
 import control.commands.Generation.VerticalRainbow;
-import model.ImageManipulation;
 import model.ImageModel;
 import model.ImageProcessor;
 
@@ -65,7 +62,7 @@ public class ProgramRunner {
     Scanner s = new Scanner(System.in);
     ImageModel model = null;
 
-    ImageManipulationCommand cmd = null;
+    ImageProcessingCommand cmd = null;
     System.out.println("Enter an option: you either load or generate an image. Type q to quit.");
     System.out.println("your options are: sepia,greyscale,blur,sharpen,edge");
     System.out.println("You can also generate the following images:");
@@ -90,11 +87,9 @@ public class ProgramRunner {
             int seedCount=s.nextInt();
             cmd=new Mosaic(seedCount);
             break;
-
           case "dither":
             cmd=new Dither();
             break;
-
           case "sepia":
             cmd = new Sepia();
             break;

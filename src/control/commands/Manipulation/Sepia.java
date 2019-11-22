@@ -1,7 +1,9 @@
 package control.commands.Manipulation;
 
 import control.ImageManipulationCommand;
+import control.ImageProcessingCommand;
 import model.ImageManipulation;
+import model.ImageModel;
 
 
 /**
@@ -9,10 +11,10 @@ import model.ImageManipulation;
  * sepia color transformation matrix. The model applies this filter and the model stores the
  * updated image pixels.
  */
-public class Sepia implements ImageManipulationCommand {
+public class Sepia implements ImageProcessingCommand {
 
   @Override
-  public void process(ImageManipulation model) {
+  public void process(ImageModel model) {
     double[][] transform = {
             {0.393, 0.769, 0.189},
             {0.349, 0.686, 0.168},

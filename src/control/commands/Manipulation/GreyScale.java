@@ -1,6 +1,7 @@
 package control.commands.Manipulation;
 
 import control.ImageManipulationCommand;
+import control.ImageProcessingCommand;
 import model.ImageManipulation;
 import model.ImageModel;
 
@@ -9,10 +10,10 @@ import model.ImageModel;
  * specific to image greyscaling. The model applies this filter and the model stores the updated
  * image pixel.
  */
-public class GreyScale implements ImageManipulationCommand {
+public class GreyScale implements ImageProcessingCommand {
 
   @Override
-  public void process(ImageManipulation model) {
+  public void process(ImageModel model) {
     double[][] transform = {
             {0.2126, 0.7152, 0.0722},
             {0.2126, 0.7152, 0.0722},

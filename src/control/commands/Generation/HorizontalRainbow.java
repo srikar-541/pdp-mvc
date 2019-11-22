@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import control.ImageGenerationCommand;
+import control.ImageProcessingCommand;
 import model.ImageGenerator;
+import model.ImageModel;
 
 /**
  * This class is an macro which generates a Horizontal rainbow by taking the
  * length of the flag to be generated and the thickness of each rainbow color band.
  */
-public class HorizontalRainbow implements ImageGenerationCommand {
+public class HorizontalRainbow implements ImageProcessingCommand {
   private int length;
   private int thickness;
   List<Color> colorList;
@@ -37,7 +39,7 @@ public class HorizontalRainbow implements ImageGenerationCommand {
   }
 
   @Override
-  public void process(ImageGenerator model) {
+  public void process(ImageModel model) {
 
     int stripSize = this.thickness;
     for (int i = 0; i < 7; i++) {

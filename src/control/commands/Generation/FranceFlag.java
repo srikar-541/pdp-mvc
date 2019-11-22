@@ -4,13 +4,13 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import control.ImageGenerationCommand;
-import model.ImageGenerator;
+import control.ImageProcessingCommand;
+import model.ImageModel;
 
 /**
  * This class is an macro which generates a France flag of a given width and height.
  */
-public class FranceFlag implements ImageGenerationCommand {
+public class FranceFlag implements ImageProcessingCommand {
 
   private final int width;
   private List<Color> colorList;
@@ -28,7 +28,7 @@ public class FranceFlag implements ImageGenerationCommand {
   }
 
   @Override
-  public void process(ImageGenerator model) {
+  public void process(ImageModel model) {
     int stripSize = this.width / 3;
     int height = (2 * width) / 3;
     for (int i = 0; i < 3; i++) {

@@ -1,6 +1,7 @@
 package control.commands.Manipulation;
 
 import control.ImageManipulationCommand;
+import control.ImageProcessingCommand;
 import model.ImageManipulation;
 import model.ImageModel;
 
@@ -9,9 +10,9 @@ import model.ImageModel;
  * specific to image sharpening. The model applies this filter and the model stores the updated
  * image pixels.
  */
-public class Sharpen implements ImageManipulationCommand {
+public class Sharpen implements ImageProcessingCommand {
   @Override
-  public void process(ImageManipulation model) {
+  public void process(ImageModel model) {
     double[][] sharp = {
             {-0.125, -0.125, -0.125, -0.125, -0.125},
             {-0.125, 0.25, 0.25, 0.25, -0.125},
