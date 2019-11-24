@@ -2,9 +2,7 @@ package control.commands.Generation;
 
 import java.awt.Color;
 
-import control.ImageGenerationCommand;
 import control.ImageProcessingCommand;
-import model.ImageGenerator;
 import model.ImageModel;
 
 /**

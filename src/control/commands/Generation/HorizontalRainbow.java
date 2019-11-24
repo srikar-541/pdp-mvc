@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import control.ImageGenerationCommand;
 import control.ImageProcessingCommand;
-import model.ImageGenerator;
 import model.ImageModel;
 
 /**

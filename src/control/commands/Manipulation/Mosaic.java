@@ -1,7 +1,5 @@
 package control.commands.Manipulation;
-import control.ImageManipulationCommand;
 import control.ImageProcessingCommand;
-import model.ImageManipulation;
 import model.ImageModel;
 
 public class Mosaic implements ImageProcessingCommand {

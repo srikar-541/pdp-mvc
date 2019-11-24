@@ -51,7 +51,6 @@ public class ProgramRunner {
     System.out.println("Image written to :" + filepath);
   }
 
-
   /**
    * This is the entry point of the application. User interaction code resides here.
    *
@@ -115,7 +114,6 @@ public class ProgramRunner {
           case "sharpen":
             cmd = new Sharpen();
             break;
-
           case "Horizontal Rainbow":
             System.out.println("Specify thickness of one stripe:");
             int thickness = s.nextInt();
@@ -151,7 +149,6 @@ public class ProgramRunner {
             BufferedImage result=model.getImage();
             writeImage(result,filePath);
             break;
-
           default:
             System.out.println("Invalid operation");
             break;

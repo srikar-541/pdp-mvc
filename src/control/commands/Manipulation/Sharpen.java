@@ -1,8 +1,6 @@
 package control.commands.Manipulation;
 
-import control.ImageManipulationCommand;
 import control.ImageProcessingCommand;
-import model.ImageManipulation;
 import model.ImageModel;
 
 /**
