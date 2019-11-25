@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 public interface ModelFactory {
 
-  ImageManipulation getManipulation(BufferedImage image);
+  ImageModel getImageModel(BufferedImage image);
 
-  ImageGenerator getGeneration(int width,int height);
+  ImageModel getImageModel(int width, int height);
 }
