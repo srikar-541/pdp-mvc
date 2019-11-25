@@ -2,14 +2,14 @@ package control.commands.Generation;
 
 import java.awt.Color;
 
-import control.ImageProcessingCommand;
-import model.ImageModel;
+import control.ImageGenerationCommand;
+import model.ImageGenerator;
 
 /**
  * This class is an macro which generates a Greece flag of a given width. The height
  * in a Switzerland flag equals to the width. Hence we accept only one parameter.
  */
-public class Switzerland implements ImageProcessingCommand {
+public class Switzerland implements ImageGenerationCommand {
   private final int width;
 
   /**
@@ -22,7 +22,7 @@ public class Switzerland implements ImageProcessingCommand {
   }
 
   @Override
-  public void process(ImageModel model) {
+  public void process(ImageGenerator model) {
     model.drawVerticalBand(0, 0, width - 1, width - 1, Color.RED);
     model.drawHorizontalBand((6 * width) / 32, (13 * width) / 32,
             (26 * width) / 32, (19 * width) / 32, Color.WHITE);

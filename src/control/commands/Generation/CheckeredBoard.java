@@ -2,14 +2,14 @@ package control.commands.Generation;
 
 import java.awt.Color;
 
-import control.ImageProcessingCommand;
-import model.ImageModel;
+import control.ImageGenerationCommand;
+import model.ImageGenerator;
 
 /**
  * This class is an macro which generates a checkerboard of a given unit square size.
  * The checkerboard is an 8X8 box containing squares.
  */
-public class CheckeredBoard implements ImageProcessingCommand {
+public class CheckeredBoard implements ImageGenerationCommand {
 
   private final int squareSize;
 
@@ -23,7 +23,7 @@ public class CheckeredBoard implements ImageProcessingCommand {
   }
 
   @Override
-  public void process(ImageModel model) {
+  public void process(ImageGenerator model) {
     for (int i = 0; i < 8; i++) {
       int boxNumber = i % 2 == 0 ? 0 : 1;
       for (int j = 0; j < 8; j++) {

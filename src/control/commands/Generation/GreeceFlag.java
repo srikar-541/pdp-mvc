@@ -2,13 +2,13 @@ package control.commands.Generation;
 
 import java.awt.Color;
 
-import control.ImageProcessingCommand;
-import model.ImageModel;
+import control.ImageGenerationCommand;
+import model.ImageGenerator;
 
 /**
  * This class is an macro which generates a Greece flag of a given width and height.
  */
-public class GreeceFlag implements ImageProcessingCommand {
+public class GreeceFlag implements ImageGenerationCommand {
 
   private final int height;
   private final int width;
@@ -23,7 +23,7 @@ public class GreeceFlag implements ImageProcessingCommand {
   }
 
   @Override
-  public void process(ImageModel model) {
+  public void process(ImageGenerator model) {
     int thickness = height / 9;
     int bandWidth = width / 15;
     Color blueColor = new Color(13, 94, 175);

@@ -4,14 +4,14 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import control.ImageProcessingCommand;
-import model.ImageModel;
+import control.ImageGenerationCommand;
+import model.ImageGenerator;
 
 /**
  * This class is an macro which generates a Vertical rainbow by taking the
  * height of the flag to be generated and the width of each rainbow color band.
  */
-public class VerticalRainbow implements ImageProcessingCommand {
+public class VerticalRainbow implements ImageGenerationCommand {
 
   private int height;
   private int bandwidth;
@@ -38,7 +38,7 @@ public class VerticalRainbow implements ImageProcessingCommand {
   }
 
   @Override
-  public void process(ImageModel model) {
+  public void process(ImageGenerator model) {
 
     int stripSize = this.bandwidth;
     for (int i = 0; i < 7; i++) {
