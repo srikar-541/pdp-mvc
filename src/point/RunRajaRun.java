@@ -70,8 +70,6 @@ public class RunRajaRun {
     Scanner s = new Scanner(System.in);
     ModelFactory f=new ModelFactoryImpl();
     ImageModel model = null;
-    ImageManipulation manipulationModel=model;
-    ImageGenerator generatorModel=model;
 
     ImageManipulationCommand manipulationCommand=null;
     ImageGenerationCommand generationCommand=null;
@@ -92,8 +90,7 @@ public class RunRajaRun {
 //            String filePath = s.nextLine();
             String filePath="input/manhattan-small.png";
             BufferedImage img = readImage(filePath);
-//            model = new ImageProcessor(img);
-            manipulationModel=f.getManipulation(img);
+            model = f.getImageModel(img);
             System.out.println("Read image from " + filePath + " of : ");
             System.out.println("width: " + img.getWidth());
             System.out.println("height: " + img.getHeight());
