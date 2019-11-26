@@ -4,7 +4,6 @@ import java.io.FileReader;
 import controller.Controller;
 import controller.ImageProcessorController;
 import model.ImageProcessor;
-import model.ModelFactory;
 
 public class UrukuRaBai {
 
