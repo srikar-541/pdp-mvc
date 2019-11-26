@@ -1,5 +1,8 @@
 package control.commands;
 
+/**
+ * This class holds the enums required for this application.
+ */
 public enum FilterEnum {
 
   Blur(Constants.BLUR_KERNEL),

@@ -1,5 +1,9 @@
 package control.commands;
 
+/**
+ * This class holds the standard constants required for this application such as the matrix
+ * representation of the kernels.
+ */
 public class Constants {
 
   static final double[][] BLUR_KERNEL = {

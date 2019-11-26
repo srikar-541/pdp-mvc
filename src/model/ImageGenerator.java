@@ -108,6 +108,10 @@ public interface ImageGenerator{
    */
   BufferedImage getImage();
 
-
+  /**
+   * This method resets the canvas to a blank canvas of given width and height.
+   * @param width width of the blank canvas.
+   * @param height height of the blank canvas.
+   */
   void resetCanvas(int width, int height);
 }

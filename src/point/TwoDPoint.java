@@ -48,20 +48,6 @@ public class TwoDPoint {
   }
 
   /**
-   * This method computes the distance between this point and another point using the
-   * euclidean distance formula.
-   * @param     other the other point from which the Euclidean distance to this point has to be
-   *              calculated.
-   * @return    the euclidean distance of this point from another point.
-   */
-
-//  public int getEuclideanDistance(TwoDPoint other) {
-//    TwoDPoint otherTwoD =  other;
-//    return Math.sqrt(Math.pow(this.x - otherTwoD.getX(), 2) +
-//            Math.pow(this.y - otherTwoD.getY(), 2));
-//  }
-
-  /**
    * Adds two points and returns the resulting point. The value of corresponding dimensions is
    * added to form a new point.
    * @param     other The point which has  to be added to this point.
@@ -72,25 +58,6 @@ public class TwoDPoint {
     TwoDPoint p =  other;
     return new TwoDPoint(this.x + p.getX(), this.y + p.getY());
   }
-
-  /**
-   * Divides each dimension value of this point with a constant.
-   *
-   * @param divisor the value with which this point has to be divided.
-   * @return new Point object resulting from dividing the x and y co ordinates by a constant.
-   */
-
-//  public TwoDPoint divideBy(double divisor) {
-//    return new TwoDPoint(this.x / divisor, this.y / divisor);
-//  }
-
-  /**
-   * Subtracts two points and returns the resulting point. The value of corresponding
-   * dimensions is subtracted to form a new point.
-   *
-   * @param     other The point which has to be subtracted from this point.
-   * @return    new Point resulting from subtracting the x and y co ordinates of two points.
-   */
 
   public TwoDPoint subtract(TwoDPoint other) {
     TwoDPoint p =  other;
