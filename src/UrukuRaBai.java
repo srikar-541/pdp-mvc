@@ -12,6 +12,14 @@ import model.ImageProcessor;
  */
 public class UrukuRaBai {
 
+  /**
+   * This method is the runner for the image processing application.
+   * It creates a controller object, passes the data source from which data is to be parsed
+   * by the controller, creates a model object which contains image data.
+   * @param     args Command line arguments.
+   * @throws    FileNotFoundException Throws an exception if the file passed
+   *                                  is not present.
+   */
   public static void main(String[] args) throws FileNotFoundException {
     String filePath = args[0];
     Readable readable = new FileReader(filePath);
