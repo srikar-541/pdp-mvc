@@ -133,21 +133,25 @@ public class ImageProcessor implements ImageModel {
 
   @Override
   public void setRed(int x, int y, int red) {
+    checkValidOperation();
     this.reds[y][x] = clamp(red);
   }
 
   @Override
   public void setGreen(int x, int y, int green) {
+    checkValidOperation();
     this.greens[y][x] = clamp(green);
   }
 
   @Override
   public void setBlue(int x, int y, int blue) {
+    checkValidOperation();
     this.blues[y][x] = clamp(blue);
   }
 
   @Override
   public void setPixel(int x, int y, int pixel) {
+    checkValidOperation();
     Color color = new Color(pixel);
     int red = color.getRed();
     int green = color.getGreen();
