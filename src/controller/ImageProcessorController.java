@@ -22,6 +22,7 @@ import control.commands.Generation.VerticalRainbow;
 import control.commands.Manipulation.Dither;
 import control.commands.Manipulation.Filter;
 import control.commands.Manipulation.Mosaic;
+import control.commands.Manipulation.Transform;
 import model.ImageModel;
 
 public class ImageProcessorController implements Controller {
@@ -53,9 +54,6 @@ public class ImageProcessorController implements Controller {
         if (generationKnownCommands.containsKey(command) ||
                 manipulationKnownCommands.containsKey(command)) {
           if (generationKnownCommands.containsKey(command)) {
-            /*int width = Integer.parseInt(commands.get(i)[1]);
-            int height = Integer.parseInt(commands.get(i)[2]);
-            model.resetCanvas(width, height);*/
             generationKnownCommands.get(command).apply(scanner).process(model);
           } else {
             manipulationKnownCommands.get(command).apply(scanner).process(model);
@@ -105,8 +103,8 @@ public class ImageProcessorController implements Controller {
             manipulationKnownCommands = new HashMap<>();
     manipulationKnownCommands.put("mosaic", scanner -> new Mosaic(scanner.nextInt()));
     manipulationKnownCommands.put("dither", scanner -> new Dither());
-    manipulationKnownCommands.put("sepia", scanner -> new Filter(FilterEnum.Sepia));
-    manipulationKnownCommands.put("greyscale", scanner -> new Filter(FilterEnum.GreyScale));
+    manipulationKnownCommands.put("sepia", scanner -> new Transform(FilterEnum.Sepia));
+    manipulationKnownCommands.put("greyscale", scanner -> new Transform(FilterEnum.GreyScale));
     manipulationKnownCommands.put("blur", scanner -> new Filter(FilterEnum.Blur));
     manipulationKnownCommands.put("sharpen", scanner -> new Filter(FilterEnum.Sharpen));
 

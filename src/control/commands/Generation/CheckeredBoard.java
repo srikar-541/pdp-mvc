@@ -24,6 +24,7 @@ public class CheckeredBoard implements ImageGenerationCommand {
 
   @Override
   public void process(ImageGenerator model) {
+    updateModel(model);
     for (int i = 0; i < 8; i++) {
       int boxNumber = i % 2 == 0 ? 0 : 1;
       for (int j = 0; j < 8; j++) {
@@ -39,5 +40,9 @@ public class CheckeredBoard implements ImageGenerationCommand {
         boxNumber++;
       }
     }
+  }
+
+  private void updateModel(ImageGenerator model) {
+    model.resetCanvas(8 * squareSize, 8 * squareSize);
   }
 }

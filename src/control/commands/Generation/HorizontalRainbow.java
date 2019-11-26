@@ -38,11 +38,15 @@ public class HorizontalRainbow implements ImageGenerationCommand {
 
   @Override
   public void process(ImageGenerator model) {
-
+    updateModel(model);
     int stripSize = this.thickness;
     for (int i = 0; i < 7; i++) {
       model.drawHorizontalBand(0, i * stripSize, length - 1, (i + 1) * stripSize - 1,
               colorList.get(i));
     }
+  }
+
+  private void updateModel(ImageGenerator model) {
+    model.resetCanvas(length, thickness * 7);
   }
 }

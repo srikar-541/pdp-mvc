@@ -40,11 +40,15 @@ public class VerticalRainbow implements ImageGenerationCommand {
 
   @Override
   public void process(ImageGenerator model) {
-
+    updateModel(model);
     int stripSize = this.bandwidth;
     for (int i = 0; i < 7; i++) {
       model.drawVerticalBand(i * stripSize, 0, (i + 1) * stripSize - 1, height - 1,
               colorList.get(i));
     }
+  }
+
+  private void updateModel(ImageGenerator model) {
+    model.resetCanvas(bandwidth * 7, height);
   }
 }

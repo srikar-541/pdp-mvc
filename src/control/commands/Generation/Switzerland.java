@@ -24,10 +24,15 @@ public class Switzerland implements ImageGenerationCommand {
 
   @Override
   public void process(ImageGenerator model) {
+    updateModel(model);
     model.drawVerticalBand(0, 0, width - 1, width - 1, Color.RED);
     model.drawHorizontalBand((6 * width) / 32, (13 * width) / 32,
             (26 * width) / 32, (19 * width) / 32, Color.WHITE);
     model.drawVerticalBand((13 * width) / 32, (6 * width) / 32,
             (19 * width) / 32, (26 * width) / 32, Color.WHITE);
+  }
+
+  private void updateModel(ImageGenerator model) {
+    model.resetCanvas(width, width);
   }
 }
