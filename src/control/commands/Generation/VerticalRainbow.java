@@ -20,8 +20,9 @@ public class VerticalRainbow implements ImageGenerationCommand {
   /**
    * This constructor creates an object of VerticalRainbow by taking parameters
    * as the height of the image and the width of each color band.
-   * @param     height The height of the flag to be generated.
-   * @param     bandwidth The width of each color band.
+   *
+   * @param height    The height of the flag to be generated.
+   * @param bandwidth The width of each color band.
    */
   public VerticalRainbow(int height, int bandwidth) {
     this.height = height;

@@ -1,3 +1,4 @@
+/*
 package point;
 
 import java.awt.image.BufferedImage;
@@ -12,17 +13,13 @@ import javax.imageio.ImageIO;
 import control.ImageGenerationCommand;
 import control.ImageManipulationCommand;
 import control.ImageProcessingCommand;
-import control.commands.Manipulation.Blur;
 import control.commands.Generation.CheckeredBoard;
 import control.commands.Generation.FranceFlag;
 import control.commands.Generation.GreeceFlag;
 import control.commands.Manipulation.Dither;
-import control.commands.Manipulation.GreyScale;
 import control.commands.Generation.HorizontalRainbow;
 import control.commands.Manipulation.Mosaic;
 
-import control.commands.Manipulation.Sepia;
-import control.commands.Manipulation.Sharpen;
 import control.commands.Generation.Switzerland;
 import control.commands.Generation.VerticalRainbow;
 import model.ImageGenerator;
@@ -32,10 +29,12 @@ import model.ImageProcessor;
 import model.ModelFactory;
 import model.ModelFactoryImpl;
 
+*/
 /**
  * This class runs the ImageProcessor application. It gives user options like loading an image,
  * filtering, coloring and generating an image.
- */
+ *//*
+
 public class RunRajaRun {
 
   private static BufferedImage readImage(String filepath) {
@@ -60,11 +59,13 @@ public class RunRajaRun {
     System.out.println("Image written to :" + filepath);
   }
 
-  /**
+  */
+/**
    * This is the entry point of the application. User interaction code resides here.
    *
    * @param args Command Line Arguments
-   */
+   *//*
+
   public static void main(String[] args) {
 
     Scanner s = new Scanner(System.in);
@@ -142,3 +143,4 @@ public class RunRajaRun {
     }
   }
 }
+*/

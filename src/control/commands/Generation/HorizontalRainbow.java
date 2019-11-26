@@ -14,7 +14,7 @@ import model.ImageGenerator;
 public class HorizontalRainbow implements ImageGenerationCommand {
   private int length;
   private int thickness;
-  List<Color> colorList;
+  private List<Color> colorList;
 
   /**
    * This constructor creates an object of HorizontalRainbow by taking parameters

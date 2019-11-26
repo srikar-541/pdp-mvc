@@ -6,15 +6,16 @@ import control.ImageGenerationCommand;
 import model.ImageGenerator;
 
 /**
- * This class is an macro which generates a Greece flag of a given width. The height
- * in a Switzerland flag equals to the width. Hence we accept only one parameter.
+ * This class is an macro which generates a Greece flag of a given width.
+ * The height in a Switzerland flag equals to the width. Hence we accept only one parameter.
  */
 public class Switzerland implements ImageGenerationCommand {
   private final int width;
 
   /**
-   * This creates an object of type Switzerland flag by taking in parameter
-   * of the width of the final flag to be generated.
+   * This creates an object of type Switzerland flag by taking in parameter of the
+   * width of the final flag to be generated.
+   *
    * @param width of the  flag.
    */
   public Switzerland(int width) {

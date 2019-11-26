@@ -11,8 +11,8 @@ import java.util.Random;
 import point.TwoDPoint;
 
 /**
- * This class is an implementation of the ImageModel. It implements the functionality of filtering,
- * transforming and image generation.
+ * This class is an implementation of the ImageModel. It implements the functionality of filtering, transforming and
+ * image generation.
  */
 public class ImageProcessor implements ImageModel {
 
@@ -20,30 +20,26 @@ public class ImageProcessor implements ImageModel {
   private int[][] greens;
   private int[][] blues;
 
-  private final int height;
-  private final int width;
+  private int height;
+  private int width;
 
   /**
-   * This creates an object of type ImageProcessor by taking a BufferedImage as input. The image is
-   * loaded by reading the individual r,g,b pixel values from a BufferedImage and setting them in
-   * the blue, green and red matrices. This object is created when filtering/coloring operation is
-   * to applied.
+   * This creates an object of type ImageProcessor by taking a BufferedImage as input. The image is loaded by reading
+   * the individual r,g,b pixel values from a BufferedImage and setting them in the blue, green and red matrices. This
+   * object is created when filtering/coloring operation is to applied.
    *
-   * @param image The original image on which operations of filtering, transforming are to be
-   *              applied.
+   * @param image The original image on which operations of filtering, transforming are to be applied.
    */
-  public ImageProcessor(BufferedImage image) {
+  @Override
+  public void loadImage(BufferedImage image) {
+    if (image == null) {
+      throw new IllegalArgumentException("No data to set");
+    }
+
     this.width = image.getWidth();
     this.height = image.getHeight();
+    updateMatrix();
 
-    this.reds = new int[height][width];
-    this.greens = new int[height][width];
-    this.blues = new int[height][width];
-
-    loadImage(image);
-  }
-
-  private void loadImage(BufferedImage image) {
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
         int pixel = image.getRGB(j, i);
@@ -55,19 +51,10 @@ public class ImageProcessor implements ImageModel {
     }
   }
 
-  /**
-   * This creates an object of type ImageProcessor by taking height and width as input and setting
-   * the matrix of r,g,b to default. This constructor is used when images are to be generated.
-   *
-   * @param width  The width of the image to be generated.
-   * @param height The height of the image to be generated.
-   */
-  public ImageProcessor(int width, int height) {
-    this.width = width;
-    this.height = height;
-    this.reds = new int[height][width];
-    this.greens = new int[height][width];
-    this.blues = new int[height][width];
+  private void updateMatrix() {
+    this.reds = new int[this.height][this.width];
+    this.blues = new int[this.height][this.width];
+    this.greens = new int[this.height][this.width];
   }
 
   //This methods clamps color of red,blue,green. It sets the value to 0 if
@@ -95,6 +82,21 @@ public class ImageProcessor implements ImageModel {
       }
     }
     return result;
+  }
+
+  /**
+   * This creates an object of type ImageProcessor by taking height and width as input and setting the matrix of r,g,b
+   * to default. This constructor is used when images are to be generated.
+   *
+   * @param width  The width of the image to be generated.
+   * @param height The height of the image to be generated.
+   */
+  @Override
+  public void resetCanvas(int width, int height) {
+    this.width = width;
+    this.height = height;
+
+    updateMatrix();
   }
 
   @Override
@@ -292,23 +294,23 @@ public class ImageProcessor implements ImageModel {
   @Override
   public void mosaic(int seed) {
 
-    List<Integer> x=generateRandom(seed,this.height);
-    List<Integer> y=generateRandom(seed,this.width);
-    List<TwoDPoint> randomCenters=generatePoints(x,y);
+    List<Integer> x = generateRandom(seed, this.height);
+    List<Integer> y = generateRandom(seed, this.width);
+    List<TwoDPoint> randomCenters = generatePoints(x, y);
 
     Map<TwoDPoint, List<TwoDPoint>> clusters = initializeClusters(randomCenters);
-    List<TwoDPoint> allPoints=populate();
+    List<TwoDPoint> allPoints = populate();
     assignCentersToPoints(allPoints, clusters);
-    List< List<Integer> > rgbValues=generateAverageColors(clusters);
-    setNewRGBValues(clusters,rgbValues);
+    List<List<Integer>> rgbValues = generateAverageColors(clusters);
+    setNewRGBValues(clusters, rgbValues);
 
   }
 
   private void setNewRGBValues(Map<TwoDPoint, List<TwoDPoint>> clusters, List<List<Integer>> rgbValues) {
-    int j=0;
-    for(Map.Entry<TwoDPoint,List<TwoDPoint>> entry: clusters.entrySet()){
-      List<TwoDPoint> clusterPoints=entry.getValue();
-      List<Integer> colors=rgbValues.get(j);
+    int j = 0;
+    for (Map.Entry<TwoDPoint, List<TwoDPoint>> entry : clusters.entrySet()) {
+      List<TwoDPoint> clusterPoints = entry.getValue();
+      List<Integer> colors = rgbValues.get(j);
       j++;
 
       for (TwoDPoint point : clusterPoints) {
@@ -323,50 +325,50 @@ public class ImageProcessor implements ImageModel {
   }
 
   private List<List<Integer>> generateAverageColors(Map<TwoDPoint, List<TwoDPoint>> clusters) {
-    List<List<Integer>> allColors=new ArrayList<>();
-    for(Map.Entry<TwoDPoint,List<TwoDPoint>> entry: clusters.entrySet()){
-      List<TwoDPoint> clusterPoints=entry.getValue();
+    List<List<Integer>> allColors = new ArrayList<>();
+    for (Map.Entry<TwoDPoint, List<TwoDPoint>> entry : clusters.entrySet()) {
+      List<TwoDPoint> clusterPoints = entry.getValue();
       clusterPoints.add(entry.getKey());
-      List<Integer> averageColor=getAverageClusterColor(clusterPoints);
+      List<Integer> averageColor = getAverageClusterColor(clusterPoints);
       allColors.add(averageColor);
     }
     return allColors;
   }
 
   private List<Integer> getAverageClusterColor(List<TwoDPoint> clusterPoints) {
-    List<Integer> rgb=new ArrayList<>();
+    List<Integer> rgb = new ArrayList<>();
 
-    List <Integer> reds=new ArrayList<>();
-    List <Integer> greens=new ArrayList<>();
-    List <Integer> blues=new ArrayList<>();
-    for (TwoDPoint point:clusterPoints) {
+    List<Integer> reds = new ArrayList<>();
+    List<Integer> greens = new ArrayList<>();
+    List<Integer> blues = new ArrayList<>();
+    for (TwoDPoint point : clusterPoints) {
       reds.add(this.reds[point.getX()][point.getY()]);
       greens.add(this.greens[point.getX()][point.getY()]);
       blues.add(this.blues[point.getX()][point.getY()]);
     }
 
-    rgb.add( clamp(reds.stream().mapToInt(i->i).sum()/reds.size()));
-    rgb.add( clamp(  greens.stream().mapToInt(i->i).sum()/greens.size()));
-    rgb.add(clamp(blues.stream().mapToInt(i->i).sum()/blues.size()));
+    rgb.add(clamp(reds.stream().mapToInt(i -> i).sum() / reds.size()));
+    rgb.add(clamp(greens.stream().mapToInt(i -> i).sum() / greens.size()));
+    rgb.add(clamp(blues.stream().mapToInt(i -> i).sum() / blues.size()));
     return rgb;
   }
 
   private List<TwoDPoint> populate() {
-    List<TwoDPoint> allPoints=new ArrayList<>();
-    for(int i=0; i<this.height;i++){
-      for(int j=0; j<this.width;j++){
-        allPoints.add(new TwoDPoint(i,j));
+    List<TwoDPoint> allPoints = new ArrayList<>();
+    for (int i = 0; i < this.height; i++) {
+      for (int j = 0; j < this.width; j++) {
+        allPoints.add(new TwoDPoint(i, j));
       }
     }
     return allPoints;
   }
 
-  private TwoDPoint getNewCenter(TwoDPoint point,Map<TwoDPoint, List<TwoDPoint>> clusters) {
+  private TwoDPoint getNewCenter(TwoDPoint point, Map<TwoDPoint, List<TwoDPoint>> clusters) {
     double minDistance = Double.POSITIVE_INFINITY;
     TwoDPoint newCenter = null;
     double distance;
     for (TwoDPoint center : clusters.keySet()) {
-      distance = Math.sqrt( Math.pow(center.getX()-point.getX(),2)+Math.pow(center.getY()-point.getY(),2) );
+      distance = Math.sqrt(Math.pow(center.getX() - point.getX(), 2) + Math.pow(center.getY() - point.getY(), 2));
       if (distance < minDistance) {
         minDistance = distance;
         newCenter = center;
@@ -377,7 +379,7 @@ public class ImageProcessor implements ImageModel {
 
   private void assignCentersToPoints(List<TwoDPoint> points, Map<TwoDPoint, List<TwoDPoint>> clusters) {
     for (TwoDPoint point : points) {
-      TwoDPoint center = getNewCenter(point,clusters);
+      TwoDPoint center = getNewCenter(point, clusters);
       List<TwoDPoint> centerList = clusters.get(center);
       centerList.add(point);
       clusters.put(center, centerList);
@@ -393,18 +395,18 @@ public class ImageProcessor implements ImageModel {
   }
 
   private List<TwoDPoint> generatePoints(List<Integer> x, List<Integer> y) {
-    List<TwoDPoint> points=new ArrayList<>();
-    for(int i=0;i<x.size();i++){
-      points.add( new TwoDPoint(x.get(i),y.get(i)));
+    List<TwoDPoint> points = new ArrayList<>();
+    for (int i = 0; i < x.size(); i++) {
+      points.add(new TwoDPoint(x.get(i), y.get(i)));
     }
     return points;
   }
 
-  private List<Integer> generateRandom(int n, int max){
-    List<Integer> randomNum=new ArrayList<>();
+  private List<Integer> generateRandom(int n, int max) {
+    List<Integer> randomNum = new ArrayList<>();
     Random random = new Random();
-    for(int i=0;i<n;i++){
-      int r=random.nextInt(max);
+    for (int i = 0; i < n; i++) {
+      int r = random.nextInt(max);
       randomNum.add(r);
     }
     return randomNum;
@@ -412,10 +414,6 @@ public class ImageProcessor implements ImageModel {
 
   @Override
   public void dither() {
-    ditheringProcedure();
-  }
-
-  private void ditheringProcedure() {
     for (int i = 0; i < this.height; i++) {
       for (int j = 0; j < this.width; j++) {
         int oldColorRed = reds[i][j];
@@ -427,24 +425,24 @@ public class ImageProcessor implements ImageModel {
         blues[i][j] = newColorRed;
 
         if (j < this.width - 1) {
-          reds[i][j + 1] += Math.round(7.0/16 * errorRed);
-          greens[i][j + 1] += Math.round(7.0/16 * errorRed);
-          blues[i][j + 1] += Math.round(7.0/16 * errorRed);
+          reds[i][j + 1] += Math.round(7.0 / 16 * errorRed);
+          greens[i][j + 1] += Math.round(7.0 / 16 * errorRed);
+          blues[i][j + 1] += Math.round(7.0 / 16 * errorRed);
         }
         if (i < this.height - 1 && j > 0) {
-          reds[i + 1][j - 1] += Math.round(3.0/16 * errorRed);
-          greens[i + 1][j - 1] += Math.round(3.0/16 * errorRed);
-          blues[i + 1][j - 1] += Math.round(3.0/16 * errorRed);
+          reds[i + 1][j - 1] += Math.round(3.0 / 16 * errorRed);
+          greens[i + 1][j - 1] += Math.round(3.0 / 16 * errorRed);
+          blues[i + 1][j - 1] += Math.round(3.0 / 16 * errorRed);
         }
         if (i < this.height - 1) {
-          reds[i + 1][j] += Math.round(5.0 /16 * errorRed);
-          greens[i + 1][j] += Math.round(5.0 /16 * errorRed);
-          blues[i + 1][j] += Math.round(5.0 /16 * errorRed);
+          reds[i + 1][j] += Math.round(5.0 / 16 * errorRed);
+          greens[i + 1][j] += Math.round(5.0 / 16 * errorRed);
+          blues[i + 1][j] += Math.round(5.0 / 16 * errorRed);
         }
         if (i < this.height - 1 && j < this.width - 1) {
-          reds[i + 1][j + 1] += Math.round(1.0 /16 * errorRed);
-          greens[i + 1][j + 1] += Math.round(1.0 /16 * errorRed);
-          blues[i + 1][j + 1] += Math.round(1.0 /16 * errorRed);
+          reds[i + 1][j + 1] += Math.round(1.0 / 16 * errorRed);
+          greens[i + 1][j + 1] += Math.round(1.0 / 16 * errorRed);
+          blues[i + 1][j + 1] += Math.round(1.0 / 16 * errorRed);
         }
       }
     }
@@ -453,5 +451,4 @@ public class ImageProcessor implements ImageModel {
   private int getNewColor(int oldColor) {
     return oldColor < 128 ? 0 : 255;
   }
-
 }

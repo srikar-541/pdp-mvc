@@ -108,4 +108,6 @@ public interface ImageGenerator{
    */
   BufferedImage getImage();
 
+
+  void resetCanvas(int width, int height);
 }

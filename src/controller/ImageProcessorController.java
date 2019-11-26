@@ -3,9 +3,7 @@ package controller;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
@@ -14,57 +12,51 @@ import javax.imageio.ImageIO;
 
 import control.ImageGenerationCommand;
 import control.ImageManipulationCommand;
+import control.commands.FilterEnum;
 import control.commands.Generation.CheckeredBoard;
 import control.commands.Generation.FranceFlag;
 import control.commands.Generation.GreeceFlag;
 import control.commands.Generation.HorizontalRainbow;
 import control.commands.Generation.Switzerland;
 import control.commands.Generation.VerticalRainbow;
-import control.commands.Manipulation.Blur;
 import control.commands.Manipulation.Dither;
-import control.commands.Manipulation.GreyScale;
+import control.commands.Manipulation.Filter;
 import control.commands.Manipulation.Mosaic;
-import control.commands.Manipulation.Sepia;
-import control.commands.Manipulation.Sharpen;
-import model.ImageGenerator;
-import model.ImageManipulation;
 import model.ImageModel;
-import model.ModelFactory;
 
 public class ImageProcessorController implements Controller {
 
   private Readable readable;
-  private final ModelFactory factory;
+  private final ImageModel model;
 
-  public ImageProcessorController(Readable readable, ModelFactory factory) {
+  public ImageProcessorController(Readable readable, ImageModel model) {
     this.readable = readable;
-    this.factory = factory;
+    this.model = model;
   }
 
   @Override
   public void process() {
-    ImageModel model = null;
     Map<String, Function<Scanner, ImageGenerationCommand>> generationKnownCommands =
             setupGenerationKnownCommands();
     Map<String, Function<Scanner, ImageManipulationCommand>> manipulationKnownCommands =
             setupManipulationKnownCommands();
 
     Scanner scanner = new Scanner(readable);
-    //List<String> commands = getCommands();
     while (scanner.hasNextLine()) {
       String command = scanner.nextLine();
       if (command.equals("load")) {
         BufferedImage image = readImage(scanner.nextLine());
-        model = factory.getImageModel(image);
+        model.loadImage(image);
       } else if (command.equals("save")) {
         writeImage(model.getImage(), scanner.nextLine());
       } else {
         if (generationKnownCommands.containsKey(command) ||
                 manipulationKnownCommands.containsKey(command)) {
           if (generationKnownCommands.containsKey(command)) {
-            model = factory.getImageModel(scanner.nextInt(), scanner.nextInt());
-            Function<Scanner, ImageGenerationCommand> function = generationKnownCommands.get(command);
-            function.apply(scanner).process(model);
+            /*int width = Integer.parseInt(commands.get(i)[1]);
+            int height = Integer.parseInt(commands.get(i)[2]);
+            model.resetCanvas(width, height);*/
+            generationKnownCommands.get(command).apply(scanner).process(model);
           } else {
             manipulationKnownCommands.get(command).apply(scanner).process(model);
           }
@@ -73,15 +65,6 @@ public class ImageProcessorController implements Controller {
     }
   }
 
-  private List<String> getCommands() {
-    Scanner scanner = new Scanner(readable);
-    List<String> commands = new ArrayList<>();
-    while (scanner.hasNextLine()) {
-      commands.add(scanner.nextLine());
-    }
-
-    return commands;
-  }
   private BufferedImage readImage(String filepath) {
     try {
       return ImageIO.read(new File(filepath));
@@ -122,12 +105,11 @@ public class ImageProcessorController implements Controller {
             manipulationKnownCommands = new HashMap<>();
     manipulationKnownCommands.put("mosaic", scanner -> new Mosaic(scanner.nextInt()));
     manipulationKnownCommands.put("dither", scanner -> new Dither());
-    manipulationKnownCommands.put("sepia", scanner -> new Sepia());
-    manipulationKnownCommands.put("greyscale", scanner -> new GreyScale());
-    manipulationKnownCommands.put("blur", scanner -> new Blur());
-    manipulationKnownCommands.put("sharpen", scanner -> new Sharpen());
+    manipulationKnownCommands.put("sepia", scanner -> new Filter(FilterEnum.Sepia));
+    manipulationKnownCommands.put("greyscale", scanner -> new Filter(FilterEnum.GreyScale));
+    manipulationKnownCommands.put("blur", scanner -> new Filter(FilterEnum.Blur));
+    manipulationKnownCommands.put("sharpen", scanner -> new Filter(FilterEnum.Sharpen));
 
     return manipulationKnownCommands;
   }
 }
-

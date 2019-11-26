@@ -5,6 +5,4 @@ package model;
  * manipulation and image generation and brings them together for the purpose of our application.
  */
 public interface ImageModel extends ImageManipulation, ImageGenerator {
-
-
 }
