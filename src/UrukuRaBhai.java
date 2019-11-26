@@ -10,7 +10,7 @@ import model.ImageProcessor;
  * to which a file as an argument to the controller and relinquishes control to
  * the controller's process method.
  */
-public class UrukuRaBai {
+public class UrukuRaBhai {
 
   /**
    * This method is the runner for the image processing application.

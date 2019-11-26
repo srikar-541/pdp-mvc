@@ -1,5 +1,7 @@
 load
 input/manhattan-small.png
+save
+output/u.png
 blur
 save
 output/uttigane-blur.png
@@ -17,6 +19,10 @@ Greece
 1000
 save
 output/greece.png
+mosaic
+1000
+save
+output/uttigane-greece-mosaic.png
 load
 input/manhattan-small.png
 mosaic
