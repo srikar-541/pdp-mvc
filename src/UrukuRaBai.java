@@ -6,8 +6,9 @@ import controller.ImageProcessorController;
 import model.ImageProcessor;
 
 /**
- * This class is the runner for our application. It reads input from the text file, creates the
- * controller object and relinquishes control to the controller's process method.
+ * This class is the runner for our application. It creates the controller object
+ * to which a file as an argument to the controller and relinquishes
+ * control to the controller's process method.
  */
 public class UrukuRaBai {
   
