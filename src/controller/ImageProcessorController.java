@@ -26,9 +26,10 @@ import control.commands.Manipulation.Transform;
 import model.ImageModel;
 
 /**
- * This controller is the entry point for the Image Processing application. It has the
- * data source from which the image transformations to be done are present. It parses the
- * data and calls the specific methods in the model using the ImageModel object.
+ * This controller is the entry point for the Image Processing application. It has
+ * the data source from which the image transformations to be done are present.
+ * It parses the data and calls the specific methods in the model using the
+ * ImageModel object.
  */
 public class ImageProcessorController implements Controller {
 
@@ -36,10 +37,9 @@ public class ImageProcessorController implements Controller {
   private final ImageModel model;
 
   /**
-   *
-   * @param   readable The readable object which contains the sequence of the commands to be
-   *                   applied on an image model.
-   * @param   model The ImageModel object on which the image transformations are to be done.
+   * @param readable The readable object which contains the sequence of the commands
+   *                 to be applied on an image model.
+   * @param model    The ImageModel object on which the image transformations are to be done.
    */
   public ImageProcessorController(Readable readable, ImageModel model) {
     this.readable = readable;

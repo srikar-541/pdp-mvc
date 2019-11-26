@@ -26,11 +26,11 @@ public class ImageProcessor implements ImageModel {
   /**
    * This creates an object of type ImageProcessor by taking a BufferedImage as input.
    * The image is loaded by reading the individual r,g,b pixel values from a BufferedImage
-   * and setting them in the blue, green and red matrices. This object is created when
-   * filtering/coloring operation is to applied.
+   * and setting them in the blue, green and red matrices. This
+   * object is created when filtering/coloring operation is to applied.
    *
-   * @param image The original image on which operations of filtering,
-   *              transforming are to be applied.
+   * @param image The original image on which operations of filtering, transforming
+   *             are to be applied.
    */
   @Override
   public void loadImage(BufferedImage image) {
@@ -88,8 +88,8 @@ public class ImageProcessor implements ImageModel {
 
   /**
    * This creates an object of type ImageProcessor by taking height and width as
-   * input and setting the matrix of r,g,b to default. This constructor is used when
-   * images are to be generated.
+   * input and setting the matrix of r,g,b to default. This constructor is used
+   * when images are to be generated.
    *
    * @param width  The width of the image to be generated.
    * @param height The height of the image to be generated.
@@ -104,6 +104,7 @@ public class ImageProcessor implements ImageModel {
 
   @Override
   public void transform(double[][] transformer) {
+    checkValidOperation();
     for (int i = 0; i < this.height; i++) {
       for (int j = 0; j < this.width; j++) {
         int r = this.reds[i][j];
@@ -124,6 +125,7 @@ public class ImageProcessor implements ImageModel {
 
   @Override
   public void filter(double[][] filter) {
+    checkValidOperation();
     this.reds = convolve(filter, this.reds);
     this.greens = convolve(filter, this.greens);
     this.blues = convolve(filter, this.blues);
@@ -157,6 +159,7 @@ public class ImageProcessor implements ImageModel {
 
   @Override
   public void drawVerticalLine(int x1, int y1, int length, Color lineColor) {
+    checkValidOperation();
     int red = lineColor.getRed();
     int green = lineColor.getGreen();
     int blue = lineColor.getBlue();
@@ -174,6 +177,7 @@ public class ImageProcessor implements ImageModel {
 
   @Override
   public void drawHorizontalLine(int x1, int y1, int length, Color lineColor) {
+    checkValidOperation();
     int red = lineColor.getRed();
     int green = lineColor.getGreen();
     int blue = lineColor.getBlue();
@@ -191,6 +195,7 @@ public class ImageProcessor implements ImageModel {
 
   @Override
   public void drawHorizontalBand(int x1, int y1, int x2, int y2, Color bandColor) {
+    checkValidOperation();
     for (int i = 0; i <= Math.abs(y1 - y2); i++) {
       drawHorizontalLine(x1, i + y1, Math.abs(x2 - x1) + 1, bandColor);
     }
@@ -198,6 +203,7 @@ public class ImageProcessor implements ImageModel {
 
   @Override
   public void drawVerticalBand(int x1, int y1, int x2, int y2, Color bandColor) {
+    checkValidOperation();
     for (int i = 0; i <= Math.abs(x1 - x2); i++) {
       drawVerticalLine(i + x1, y1, Math.abs(y2 - y1) + 1, bandColor);
     }
@@ -271,7 +277,6 @@ public class ImageProcessor implements ImageModel {
     return selectedMatrix;
   }
 
-
   private double convolutedValue(double[][] selectedMatrix, double[][] kernel) {
     double sum = 0;
     for (int i = 0; i < kernel.length; i++) {
@@ -296,7 +301,7 @@ public class ImageProcessor implements ImageModel {
 
   @Override
   public void mosaic(int seeds) {
-
+    checkValidOperation();
     if (seeds > this.height * this.width) {
       throw new IllegalArgumentException("Cannot create more seeds than number of pixels");
     }
@@ -375,7 +380,8 @@ public class ImageProcessor implements ImageModel {
     TwoDPoint newCenter = null;
     double distance;
     for (TwoDPoint center : clusters.keySet()) {
-      distance = Math.sqrt(Math.pow(center.getX() - point.getX(), 2) + Math.pow(center.getY() - point.getY(), 2));
+      distance = Math.sqrt(Math.pow(center.getX() - point.getX(), 2) +
+              Math.pow(center.getY() - point.getY(), 2));
       if (distance < minDistance) {
         minDistance = distance;
         newCenter = center;
@@ -422,6 +428,7 @@ public class ImageProcessor implements ImageModel {
 
   @Override
   public void dither() {
+    checkValidOperation();
     for (int i = 0; i < this.height; i++) {
       for (int j = 0; j < this.width; j++) {
         int oldColorRed = reds[i][j];
@@ -458,5 +465,11 @@ public class ImageProcessor implements ImageModel {
 
   private int getNewColor(int oldColor) {
     return oldColor < 128 ? 0 : 255;
+  }
+
+  private void checkValidOperation() {
+    if (this.reds == null || this.greens == null || this.blues == null) {
+      throw new IllegalArgumentException("Cannot perform the given operation");
+    }
   }
 }

@@ -7,8 +7,8 @@ package controller;
 public interface Controller {
 
   /**
-   * This is the entry point of the ImageProcessing application. It makes calls to the model to
-   * process the given input.
+   * This is the entry point of the ImageProcessing application.
+   * It makes calls to the model to process the given input.
    */
   void process();
 }
