@@ -1,4 +1,4 @@
-package controller;
+package control;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ import control.commands.Manipulation.Filter;
 import control.commands.Manipulation.Mosaic;
 import control.commands.Manipulation.Transform;
 
-class ControllerConstants {
+public class ControllerConstants {
   static final Map<String, Function<Scanner, ImageManipulationCommand>>
           manipulationKnownCommands = new HashMap<>();
   static final Map<String, Function<Scanner,

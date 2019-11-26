@@ -1,4 +1,4 @@
-package controller;
+package control;
 
 /**
  * This interface represents the controller for this application.

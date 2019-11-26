@@ -1,8 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-import controller.Controller;
-import controller.ImageProcessorController;
+import control.Controller;
+import control.ImageProcessorController;
 import model.ImageProcessor;
 
 /**

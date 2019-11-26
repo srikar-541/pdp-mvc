@@ -1,4 +1,4 @@
-package controller;
+package control;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
+import control.Controller;
+import control.ControllerConstants;
 import model.ImageModel;
 
 /**
