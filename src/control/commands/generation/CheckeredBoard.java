@@ -1,4 +1,4 @@
-package control.commands.Generation;
+package control.commands.generation;
 
 import java.awt.Color;
 

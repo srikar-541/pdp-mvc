@@ -1,10 +1,11 @@
 package control;
 
 import model.ImageManipulation;
+
 /**
- * This is an interface which allows a model to execute the commands specific
- * to a command design pattern. It contains all the macros which can be for future
- * enhancements. Commands implementing this class can only produce Image Manipulations.
+ * This is an interface which allows a model to execute the commands specific to a command design
+ * pattern. It contains all the macros which can be for future enhancements. Commands implementing
+ * this class can only produce Image Manipulations.
  */
 public interface ImageManipulationCommand {
 

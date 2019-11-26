@@ -5,20 +5,21 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
 
-import control.ImageGenerationCommand;
-import control.ImageManipulationCommand;
 import control.commands.FilterEnum;
-import control.commands.Generation.CheckeredBoard;
-import control.commands.Generation.FranceFlag;
-import control.commands.Generation.GreeceFlag;
-import control.commands.Generation.HorizontalRainbow;
-import control.commands.Generation.Switzerland;
-import control.commands.Generation.VerticalRainbow;
-import control.commands.Manipulation.Dither;
-import control.commands.Manipulation.Filter;
-import control.commands.Manipulation.Mosaic;
-import control.commands.Manipulation.Transform;
+import control.commands.generation.CheckeredBoard;
+import control.commands.generation.FranceFlag;
+import control.commands.generation.GreeceFlag;
+import control.commands.generation.HorizontalRainbow;
+import control.commands.generation.Switzerland;
+import control.commands.generation.VerticalRainbow;
+import control.commands.manipulation.Dither;
+import control.commands.manipulation.Filter;
+import control.commands.manipulation.Mosaic;
+import control.commands.manipulation.Transform;
 
+/**
+ * This class contains all the constants that will be used inside the controller class.
+ */
 public class ControllerConstants {
   static final Map<String, Function<Scanner, ImageManipulationCommand>>
           manipulationKnownCommands = new HashMap<>();

@@ -1,4 +1,4 @@
-package control.commands.Manipulation;
+package control.commands.manipulation;
 
 import control.ImageManipulationCommand;
 import model.ImageManipulation;
