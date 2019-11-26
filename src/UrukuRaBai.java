@@ -18,4 +18,3 @@ public class UrukuRaBai {
     controller.process();
   }
 }
-

@@ -11,8 +11,8 @@ import java.util.Random;
 import point.TwoDPoint;
 
 /**
- * This class is an implementation of the ImageModel. It implements the functionality of filtering, transforming and
- * image generation.
+ * This class is an implementation of the ImageModel. It implements the
+ * functionality of filtering, transforming and image generation.
  */
 public class ImageProcessor implements ImageModel {
 
@@ -24,11 +24,13 @@ public class ImageProcessor implements ImageModel {
   private int width;
 
   /**
-   * This creates an object of type ImageProcessor by taking a BufferedImage as input. The image is loaded by reading
-   * the individual r,g,b pixel values from a BufferedImage and setting them in the blue, green and red matrices. This
-   * object is created when filtering/coloring operation is to applied.
+   * This creates an object of type ImageProcessor by taking a BufferedImage as input.
+   * The image is loaded by reading the individual r,g,b pixel values from a BufferedImage
+   * and setting them in the blue, green and red matrices. This object is created when
+   * filtering/coloring operation is to applied.
    *
-   * @param image The original image on which operations of filtering, transforming are to be applied.
+   * @param image The original image on which operations of filtering,
+   *              transforming are to be applied.
    */
   @Override
   public void loadImage(BufferedImage image) {
@@ -85,8 +87,9 @@ public class ImageProcessor implements ImageModel {
   }
 
   /**
-   * This creates an object of type ImageProcessor by taking height and width as input and setting the matrix of r,g,b
-   * to default. This constructor is used when images are to be generated.
+   * This creates an object of type ImageProcessor by taking height and width as
+   * input and setting the matrix of r,g,b to default. This constructor is used when
+   * images are to be generated.
    *
    * @param width  The width of the image to be generated.
    * @param height The height of the image to be generated.
@@ -292,10 +295,14 @@ public class ImageProcessor implements ImageModel {
   }
 
   @Override
-  public void mosaic(int seed) {
+  public void mosaic(int seeds) {
 
-    List<Integer> x = generateRandom(seed, this.height);
-    List<Integer> y = generateRandom(seed, this.width);
+    if (seeds > this.height * this.width) {
+      throw new IllegalArgumentException("Cannot create more seeds than number of pixels");
+    }
+
+    List<Integer> x = generateRandom(seeds, this.height);
+    List<Integer> y = generateRandom(seeds, this.width);
     List<TwoDPoint> randomCenters = generatePoints(x, y);
 
     Map<TwoDPoint, List<TwoDPoint>> clusters = initializeClusters(randomCenters);
@@ -303,10 +310,10 @@ public class ImageProcessor implements ImageModel {
     assignCentersToPoints(allPoints, clusters);
     List<List<Integer>> rgbValues = generateAverageColors(clusters);
     setNewRGBValues(clusters, rgbValues);
-
   }
 
-  private void setNewRGBValues(Map<TwoDPoint, List<TwoDPoint>> clusters, List<List<Integer>> rgbValues) {
+  private void setNewRGBValues(Map<TwoDPoint, List<TwoDPoint>> clusters,
+                               List<List<Integer>> rgbValues) {
     int j = 0;
     for (Map.Entry<TwoDPoint, List<TwoDPoint>> entry : clusters.entrySet()) {
       List<TwoDPoint> clusterPoints = entry.getValue();
@@ -377,7 +384,8 @@ public class ImageProcessor implements ImageModel {
     return newCenter;
   }
 
-  private void assignCentersToPoints(List<TwoDPoint> points, Map<TwoDPoint, List<TwoDPoint>> clusters) {
+  private void assignCentersToPoints(List<TwoDPoint> points, Map<TwoDPoint,
+          List<TwoDPoint>> clusters) {
     for (TwoDPoint point : points) {
       TwoDPoint center = getNewCenter(point, clusters);
       List<TwoDPoint> centerList = clusters.get(center);

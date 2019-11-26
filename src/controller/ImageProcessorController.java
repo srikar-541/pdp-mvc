@@ -25,11 +25,22 @@ import control.commands.Manipulation.Mosaic;
 import control.commands.Manipulation.Transform;
 import model.ImageModel;
 
+/**
+ * This controller is the entry point for the Image Processing application. It has the
+ * data source from which the image transformations to be done are present. It parses the
+ * data and calls the specific methods in the model using the ImageModel object.
+ */
 public class ImageProcessorController implements Controller {
 
-  private Readable readable;
+  private final Readable readable;
   private final ImageModel model;
 
+  /**
+   *
+   * @param   readable The readable object which contains the sequence of the commands to be
+   *                   applied on an image model.
+   * @param   model The ImageModel object on which the image transformations are to be done.
+   */
   public ImageProcessorController(Readable readable, ImageModel model) {
     this.readable = readable;
     this.model = model;
@@ -82,7 +93,8 @@ public class ImageProcessorController implements Controller {
     System.out.println("Image written to :" + filepath);
   }
 
-  private Map<String, Function<Scanner, ImageGenerationCommand>> setupGenerationKnownCommands() {
+  private Map<String, Function<Scanner, ImageGenerationCommand>>
+  setupGenerationKnownCommands() {
     Map<String, Function<Scanner,
             ImageGenerationCommand>> generationKnownCommands = new HashMap<>();
     generationKnownCommands.put("Switzerland", scanner -> new Switzerland(scanner.nextInt()));
@@ -98,7 +110,8 @@ public class ImageProcessorController implements Controller {
     return generationKnownCommands;
   }
 
-  private Map<String, Function<Scanner, ImageManipulationCommand>> setupManipulationKnownCommands() {
+  private Map<String, Function<Scanner, ImageManipulationCommand>>
+  setupManipulationKnownCommands() {
     Map<String, Function<Scanner, ImageManipulationCommand>>
             manipulationKnownCommands = new HashMap<>();
     manipulationKnownCommands.put("mosaic", scanner -> new Mosaic(scanner.nextInt()));

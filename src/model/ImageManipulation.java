@@ -29,10 +29,10 @@ public interface ImageManipulation {
   void filter(double[][] filter);
 
   /**
-   * This method gets the image in the form of bufferedimage which can be stored in any format in
+   * This method gets the image in the form of BufferedImage which can be stored in any format in
    * the model implementation.
    *
-   * @return BufferedImage representation of the image.
+   * @return BufferedImage representation of the model data.
    */
   BufferedImage getImage();
 

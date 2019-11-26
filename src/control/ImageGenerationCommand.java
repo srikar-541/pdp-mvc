@@ -4,7 +4,7 @@ import model.ImageGenerator;
 
 /**
  * This is an interface which allows a model to execute the commands specific to a command design
- * pattern. It contains all the macros which can be for future enhancements.  Commands implementing
+ * pattern. It contains all the macros which can be for future enhancements. Commands implementing
  * this interface can produce Images.
  */
 public interface ImageGenerationCommand {

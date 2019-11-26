@@ -12,14 +12,6 @@ public class TwoDPoint {
   private int y;
 
   /**
-   * This creates a new 2D point with x and y co originates pointing to the origin.
-   */
-  public TwoDPoint() {
-    this.x = 0;
-    this.y = 0;
-  }
-
-  /**
    * This creates a new 2D point object with x and y co ordinates passed to this constructor.
    * @param     x The x co ordinate of the new 2D object.
    * @param     y The y co ordinate of the new 2D object.

@@ -4,12 +4,16 @@ import control.ImageManipulationCommand;
 import control.commands.FilterEnum;
 import model.ImageManipulation;
 
+/**
+ * This command class is a macro which is specific to image dither filtering.
+ */
 public class Dither implements ImageManipulationCommand {
 
   /**
-   * This method is used to tell the model to do an operation specific to the implementation.
+   * This method has sequence of steps which are required to give dithering
+   * filtering to an image.
    *
-   * @param model Model interface which contains the functionality specific to the implementation.
+   * @param model the ImageModel object which exposes image manipulation operations on an image.
    */
   @Override
   public void process(ImageManipulation model) {

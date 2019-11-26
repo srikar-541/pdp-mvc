@@ -4,7 +4,7 @@ package control.commands;
  * This class holds the standard constants required for this application such as the matrix
  * representation of the kernels.
  */
-public class Constants {
+class ImageFilteringConstants {
 
   static final double[][] BLUR_KERNEL = {
           {1.0 / 16, 1.0 / 8, 1.0 / 16},
